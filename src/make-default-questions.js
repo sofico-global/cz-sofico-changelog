@@ -21,7 +21,7 @@ module.exports = (allPackages, changedPackages) => ([
   {
     type: 'input',
     name: 'scope',
-    message: 'Denote the scope of this change:',
+    message: 'Denote the JIRA issue(s) of this change:',
   },
   {
     type: 'input',
@@ -43,11 +43,6 @@ module.exports = (allPackages, changedPackages) => ([
     type: 'input',
     name: 'breaking',
     message: 'List any BREAKING CHANGES (if none, leave blank):\n',
-  },
-  {
-    type: 'input',
-    name: 'footer',
-    message: 'List any ISSUES CLOSED by this change (optional). E.g.: #31, #34:\n',
   },
   {
     type: 'checkbox',
