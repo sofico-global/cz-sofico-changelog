@@ -1,8 +1,8 @@
 {
-  "name": "cz-lerna-changelog",
+  "name": "cz-sofico-changelog",
   "description": "Commitizen adapter following the conventional-changelog format.",
   "main": "lib/index.js",
-  "version": "2.0.2",
+  "version": "1.0.0",
   "scripts": {
     "build": "babel src -d lib",
     "commit": "git-cz",
