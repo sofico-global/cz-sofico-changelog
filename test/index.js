@@ -36,11 +36,10 @@ describe('cz-lerna-changelog', () => {
 
     const answers = {
       'Select the type of change that you\'re committing:':                         'feat',
-      'Denote the scope of this change:':                                           'Fake scope',
+      'Denote the JIRA issue(s) of this change:':                                           'Fake scope',
       'Write a short, imperative tense description of the change:\n':               'Test commit',
       'Provide a longer description of the change (optional). Use "|" to break new line:\n': 'This commit is a fake one',
       'List any BREAKING CHANGES (optional):\n':                                    '',
-      'List any ISSUES CLOSED by this change (optional). E.g.: #31, #34:\n':        '',
       'The packages that this commit has affected (0 detected)\n':                  ['test-package']
     };
 
@@ -63,7 +62,6 @@ describe('cz-lerna-changelog', () => {
       'Write a short, imperative tense description of the change:\n':               'Test commit',
       'Provide a longer description of the change (optional). Use "|" to break new line:\n': 'This commit is a fake one',
       'List any BREAKING CHANGES (optional):\n':                                    '',
-      'List any ISSUES CLOSED by this change (optional). E.g.: #31, #34:\n':        '',
       'The packages that this commit has affected (0 detected)\n':                  ['test-package']
     };
 
