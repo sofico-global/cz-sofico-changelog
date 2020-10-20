@@ -37,6 +37,12 @@ function getChangedPackages(allPackages) {
     });
 }
 
+function getJiraIssueFromBranchName() {
+  const branchName = shell.exec('git rev-parse --abbrev-ref HEAD', { silent: true }).stdout.trim();
+  const test = /^(.*\/|)((?<!([A-Za-z]{1,10})-?)[A-Za-z]+-\d+)/.exec(branchName);
+  return test ? test[2].toLocaleUpperCase() : undefined;
+}
+
 function makeAffectsLine(answers) {
   const selectedPackages = answers.packages;
   if (selectedPackages && selectedPackages.length) {
@@ -70,10 +76,11 @@ function makePrompter(makeCustomQuestions = () => []) {
     getAllPackages().then(pkgs => {
       const allPackages = pkgs.map(pkg => pkg.name);
       const changedPackages = getChangedPackages(pkgs);
+      const dafaultJiraIssue = getJiraIssueFromBranchName();
 
-      const defaultQuestions = makeDefaultQuestions(allPackages, changedPackages);
-      const customQuestions = makeCustomQuestions(allPackages, changedPackages);
-      const questions = mergeQuestions(defaultQuestions, customQuestions);
+      const defaultQuestions = makeDefaultQuestions(allPackages, changedPackages, dafaultJiraIssue);
+      const customQuestions = makeCustomQuestions(allPackages, changedPackages, dafaultJiraIssue);
+      const questions = mergeQuestions(defaultQuestions, customQuestions, dafaultJiraIssue);
 
       console.log('\n\nLine 1 will be cropped at 100 characters. All other lines will be wrapped after 100 characters.\n');
 

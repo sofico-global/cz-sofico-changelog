@@ -1,6 +1,6 @@
 import Promise from 'promise';
 
-module.exports = (allPackages, changedPackages) => ([
+module.exports = (allPackages, changedPackages, defaultJiraIssue) => ([
   {
     type: 'autocomplete',
     name: 'type',
@@ -22,6 +22,7 @@ module.exports = (allPackages, changedPackages) => ([
     type: 'input',
     name: 'scope',
     message: 'Denote the JIRA issue(s) of this change:',
+    default: defaultJiraIssue
   },
   {
     type: 'input',
