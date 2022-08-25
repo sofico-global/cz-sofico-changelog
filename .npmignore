@@ -5,3 +5,5 @@
 /.travis.yml
 /package-lock.json
 /test
+/.prettierrc
+/.editorconfig
