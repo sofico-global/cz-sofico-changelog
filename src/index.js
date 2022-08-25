@@ -1,10 +1,11 @@
 import shell from 'shelljs';
 import path from 'path';
-import { analyzeCommits } from '@semantic-release/commit-analyzer';
+import {analyzeCommits} from '@semantic-release/commit-analyzer';
 import chalk from 'chalk';
 import buildCommit from 'cz-customizable/buildCommit';
 import autocomplete from 'inquirer-autocomplete-prompt';
-const { getPackages } = require("@lerna/project");
+
+const {getPackages} = require("@lerna/project");
 
 import makeDefaultQuestions from './make-default-questions';
 import autocompleteQuestions from './autocomplete-questions';
@@ -18,7 +19,7 @@ function getAllPackages() {
 }
 
 function getChangedPackages(allPackages) {
-  const changedFiles = shell.exec('git diff --cached --name-only', { silent: true })
+  const changedFiles = shell.exec('git diff --cached --name-only', {silent: true})
     .stdout
     .split('\n')
     .map(path.normalize);
@@ -38,7 +39,7 @@ function getChangedPackages(allPackages) {
 }
 
 function getJiraIssueFromBranchName() {
-  const branchName = shell.exec('git rev-parse --abbrev-ref HEAD', { silent: true }).stdout.trim();
+  const branchName = shell.exec('git rev-parse --abbrev-ref HEAD', {silent: true}).stdout.trim();
   const test = /^(.*\/|)((?<!([A-Za-z]{1,10})-?)[A-Za-z]+-\d+)/.exec(branchName);
   return test ? test[2].toLocaleUpperCase() : undefined;
 }
@@ -64,7 +65,7 @@ function getCommitTypeMessage(type) {
 function mergeQuestions(defaultQuestions, customQuestions) {
   const questions = [];
   defaultQuestions.forEach(question => {
-    const matchingCustomQuestions = customQuestions.filter(({ name: customQuestionName }) => (customQuestionName === question.name));
+    const matchingCustomQuestions = customQuestions.filter(({name: customQuestionName}) => (customQuestionName === question.name));
     const customQuestion = matchingCustomQuestions.length > 0 && matchingCustomQuestions[0]
     questions.push(customQuestion || question);
   });
