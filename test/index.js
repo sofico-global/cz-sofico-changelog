@@ -1,9 +1,10 @@
 import assert from 'assert';
 import shell from 'shelljs';
+
 const Project = require("@lerna/project");
 
 import stub from './_stub';
-import { prompter, makePrompter } from '../src/index';
+import {prompter, makePrompter} from '../src/index';
 
 
 const createMockCommitizenCli = (answers) => ({
@@ -22,12 +23,13 @@ const createMockCommitizenCli = (answers) => ({
       }, {})
     );
   },
-  registerPrompt: () => {},
+  registerPrompt: () => {
+  },
 });
 
 
 describe('cz-lerna-changelog', () => {
-  stub(shell, 'exec', () => ({ stdout: '' }));
+  stub(shell, 'exec', () => ({stdout: ''}));
   stub(Project, 'getPackages', () => ([{
     name: 'test-package',
     location: 'packages/test-package'
@@ -35,12 +37,12 @@ describe('cz-lerna-changelog', () => {
   it('should generate correct commit message from prompt answers', (done) => {
 
     const answers = {
-      'Select the type of change that you\'re committing:':                         'feat',
-      'Denote the JIRA issue(s) of this change:':                                           'Fake scope',
-      'Write a short, imperative tense description of the change:\n':               'Test commit',
+      'Select the type of change that you\'re committing:': 'feat',
+      'Denote the JIRA issue(s) of this change:': 'Fake scope',
+      'Write a short, imperative tense description of the change:\n': 'Test commit',
       'Provide a longer description of the change (optional). Use "|" to break new line:\n': 'This commit is a fake one',
-      'List any BREAKING CHANGES (optional):\n':                                    '',
-      'The packages that this commit has affected (0 detected)\n':                  ['test-package']
+      'List any BREAKING CHANGES (optional):\n': '',
+      'The packages that this commit has affected (0 detected)\n': ['test-package']
     };
 
     prompter(createMockCommitizenCli(answers), (commitMessage) => {
@@ -57,12 +59,12 @@ describe('cz-lerna-changelog', () => {
   });
   it('allows questions to be overriden', (done) => {
     const answers = {
-      'Select the type of change that you\'re committing:':                         'feat',
-      '***Custom question for scope:***':                                           'Fake scope',
-      'Write a short, imperative tense description of the change:\n':               'Test commit',
+      'Select the type of change that you\'re committing:': 'feat',
+      '***Custom question for scope:***': 'Fake scope',
+      'Write a short, imperative tense description of the change:\n': 'Test commit',
       'Provide a longer description of the change (optional). Use "|" to break new line:\n': 'This commit is a fake one',
-      'List any BREAKING CHANGES (optional):\n':                                    '',
-      'The packages that this commit has affected (0 detected)\n':                  ['test-package']
+      'List any BREAKING CHANGES (optional):\n': '',
+      'The packages that this commit has affected (0 detected)\n': ['test-package']
     };
 
     const makeCustomQuestions = () => ([
